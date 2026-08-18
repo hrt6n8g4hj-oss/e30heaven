@@ -66,7 +66,7 @@ footer{border-top:1px solid #222;padding:35px 0;color:#888;font-size:13px}.foote
 <div class="builder">
 <div id="options"></div>
 <div class="preview"><div class="label" id="buildLabel">1989 E30 325i</div><div class="preview-controls"><button class="active">3/4</button><button>SIDE</button><button>REAR</button></div><img id="car" src="e30-preview.png" alt="E30 preview"></div>
-<div class="summary"><div class="price">BUILD VALUE <span id="price">€12,500</span></div><div><button class="btn" onclick="saveBuild()">SAVE BUILD ♡</button> <button class="btn orange" onclick="shareBuild()">SHARE ↗</button></div></div>
+<div class="summary"><div class="price">BUILD VALUE <span id="price">€12,500</span></div><div><button class="btn" onclick="saveBuild()">SAVE BUILD ♡</button> <button class="btn" onclick="loadBuild()">LOAD</button> <button class="btn orange" onclick="shareBuild()">SHARE ↗</button></div></div>
 </div></div>
 </div></section>
 
@@ -82,26 +82,172 @@ footer{border-top:1px solid #222;padding:35px 0;color:#888;font-size:13px}.foote
 <footer><div class="container footerline"><span>© 2026 E30Heaven</span><span>Built by enthusiasts. For enthusiasts.</span></div></footer>
 
 <script>
-const state={model:'325i',body:'Coupe',engine:'M20B25',color:'Brilliant Red',wheels:'BBS RS',interior:'Black',price:12500};
-const data={
-model:[['318i','M10'],['325i','M20'],['M3','S14']],
-body:[['Coupe','2-door'],['Touring','Wagon'],['Cabrio','Convertible'],['Baur','Targa']],
-engine:[['M20B25','170 hp'],['S14','195 hp'],['S54','333 hp'],['M52','193 hp']],
-color:[['Brilliant Red','Classic'],['Alpine White','Classic'],['Delphin Grey','Classic'],['Blood Orange','Custom'],['Laguna Seca Blue','Custom'],['Black','Classic']],
-wheels:[['BBS RS','17"'],['Rondell 58','17"'],['Alpina','16"'],['OEM Basketweave','15"']],
-interior:[['Black','Leather'],['Natur','Leather'],['Houndstooth','Cloth'],['Sport','Bucket']]
+const state = {
+  model:'325i', body:'Coupe', engine:'M20B25',
+  color:'Brilliant Red', wheels:'BBS RS', interior:'Black', price:12500
 };
+
+const data = {
+  model:[['318i','M10'],['325i','M20'],['M3','S14']],
+  body:[['Coupe','2-door'],['Touring','Wagon'],['Cabrio','Convertible'],['Baur','Targa']],
+  engine:[['M20B25','170 hp'],['S14','195 hp'],['S54','333 hp'],['M52','193 hp']],
+  color:[['Brilliant Red','Classic'],['Alpine White','Classic'],['Delphin Grey','Classic'],['Blood Orange','Custom'],['Laguna Seca Blue','Custom'],['Black','Classic']],
+  wheels:[['BBS RS','17"'],['Rondell 58','17"'],['Alpina','16"'],['OEM Basketweave','15"']],
+  interior:[['Black','Leather'],['Natur','Leather'],['Houndstooth','Cloth'],['Sport','Bucket']]
+};
+
+const steps=['model','body','engine','color','wheels','interior','summary'];
 let current='model';
-function render(){
-const box=document.getElementById('options');
-if(current==='summary'){box.innerHTML=`<h3>YOUR E30 BUILD</h3><div class="tile"><p><b>Model:</b> ${state.model}</p><p><b>Body:</b> ${state.body}</p><p><b>Engine:</b> ${state.engine}</p><p><b>Color:</b> ${state.color}</p><p><b>Wheels:</b> ${state.wheels}</p><p><b>Interior:</b> ${state.interior}</p></div>`;return}
-box.innerHTML=`<h3>CHOOSE YOUR ${current.toUpperCase()}</h3><div class="cards">${data[current].map(x=>`<div class="choice ${state[current]===x[0]?'selected':''}" onclick="select('${current}','${x[0]}')"><strong>${x[0]}</strong><small>${x[1]}</small></div>`).join('')}</div><div class="specs"><div class="spec"><b>MODEL</b>${state.model}</div><div class="spec"><b>ENGINE</b>${state.engine}</div><div class="spec"><b>BODY</b>${state.body}</div><div class="spec"><b>COLOR</b>${state.color}</div></div>`;
+
+function esc(value){
+  return String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
 }
-function select(k,v){state[k]=v; state.price=12500+(state.model==='M3'?35000:0)+(state.engine==='S54'?9000:0)+(state.wheels==='BBS RS'?2500:0);document.getElementById('price').textContent='€'+state.price.toLocaleString();document.getElementById('buildLabel').textContent='E30 '+state.model+' · '+state.color;document.getElementById('car').style.filter=colorFilter(state.color);render()}
-function colorFilter(c){if(c==='Blood Orange')return 'saturate(1.8) hue-rotate(-8deg)';if(c==='Laguna Seca Blue')return 'hue-rotate(155deg) saturate(1.25)';if(c==='Alpine White')return 'grayscale(.15) brightness(1.45)';if(c==='Black')return 'grayscale(1) brightness(.48)';if(c==='Delphin Grey')return 'grayscale(.8) brightness(.75)';return 'saturate(1.15)'}
-document.querySelectorAll('.step').forEach(s=>s.onclick=()=>{document.querySelectorAll('.step').forEach(x=>x.classList.remove('active'));s.classList.add('active');current=s.dataset.step;render()});
-function saveBuild(){localStorage.setItem('e30heaven-build',JSON.stringify(state));alert('Build saved on this device.')}
-function shareBuild(){const text='My E30Heaven build: '+state.model+' / '+state.body+' / '+state.engine+' / '+state.color+' / '+state.wheels+' / '+state.interior;if(navigator.share)navigator.share({title:'My E30Heaven Build',text});else navigator.clipboard?.writeText(text).then(()=>alert('Build copied to clipboard.'))}
+
+function calculatePrice(){
+  let price=12500;
+  if(state.model==='M3') price+=35000;
+  if(state.engine==='S54') price+=9000;
+  if(state.engine==='S14') price+=6000;
+  if(state.wheels==='BBS RS') price+=2500;
+  if(state.wheels==='Rondell 58') price+=1200;
+  if(state.interior==='Sport') price+=1800;
+  if(state.body==='Touring') price+=2500;
+  state.price=price;
+}
+
+function colorFilter(c){
+  if(c==='Blood Orange') return 'saturate(1.8) hue-rotate(-8deg)';
+  if(c==='Laguna Seca Blue') return 'hue-rotate(155deg) saturate(1.25)';
+  if(c==='Alpine White') return 'grayscale(.15) brightness(1.45)';
+  if(c==='Black') return 'grayscale(1) brightness(.48)';
+  if(c==='Delphin Grey') return 'grayscale(.8) brightness(.75)';
+  return 'saturate(1.15)';
+}
+
+function updatePreview(){
+  calculatePrice();
+  document.getElementById('price').textContent='€'+state.price.toLocaleString('en-US');
+  document.getElementById('buildLabel').textContent='E30 '+state.model+' · '+state.color;
+  document.getElementById('car').style.filter=colorFilter(state.color);
+}
+
+function render(){
+  const box=document.getElementById('options');
+
+  if(current==='summary'){
+    box.innerHTML=`
+      <h3>YOUR E30 BUILD</h3>
+      <div class="tile">
+        <p><b>Model:</b> ${esc(state.model)}</p>
+        <p><b>Body:</b> ${esc(state.body)}</p>
+        <p><b>Engine:</b> ${esc(state.engine)}</p>
+        <p><b>Color:</b> ${esc(state.color)}</p>
+        <p><b>Wheels:</b> ${esc(state.wheels)}</p>
+        <p><b>Interior:</b> ${esc(state.interior)}</p>
+        <p><b>Estimated build value:</b> <span style="color:var(--orange)">€${state.price.toLocaleString('en-US')}</span></p>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:15px;flex-wrap:wrap">
+        <button class="btn" onclick="goTo('model')">EDIT BUILD</button>
+        <button class="btn orange" onclick="saveBuild()">SAVE BUILD</button>
+      </div>`;
+    updatePreview();
+    return;
+  }
+
+  box.innerHTML=`
+    <h3>CHOOSE YOUR ${current.toUpperCase()}</h3>
+    <div class="cards">
+      ${data[current].map((x,i)=>`
+        <div class="choice ${state[current]===x[0]?'selected':''}" data-value="${esc(x[0])}" onclick="selectOption('${current}',${i})">
+          <strong>${esc(x[0])}</strong><small>${esc(x[1])}</small>
+        </div>`).join('')}
+    </div>
+    <div class="specs">
+      <div class="spec"><b>MODEL</b>${esc(state.model)}</div>
+      <div class="spec"><b>ENGINE</b>${esc(state.engine)}</div>
+      <div class="spec"><b>BODY</b>${esc(state.body)}</div>
+      <div class="spec"><b>COLOR</b>${esc(state.color)}</div>
+    </div>
+    <div style="display:flex;justify-content:space-between;gap:10px;margin-top:18px">
+      <button class="btn" onclick="previousStep()">← BACK</button>
+      <button class="btn orange" onclick="nextStep()">NEXT →</button>
+    </div>`;
+  updatePreview();
+}
+
+function selectOption(key,index){
+  state[key]=data[key][index][0];
+  render();
+}
+
+function goTo(step){
+  current=step;
+  document.querySelectorAll('.step').forEach(x=>x.classList.toggle('active',x.dataset.step===current));
+  render();
+}
+
+function nextStep(){
+  const i=steps.indexOf(current);
+  if(i<steps.length-1) goTo(steps[i+1]);
+}
+
+function previousStep(){
+  const i=steps.indexOf(current);
+  if(i>0) goTo(steps[i-1]);
+}
+
+document.querySelectorAll('.step').forEach(s=>{
+  s.addEventListener('click',()=>goTo(s.dataset.step));
+});
+
+document.querySelectorAll('.preview-controls button').forEach(button=>{
+  button.addEventListener('click',()=>{
+    document.querySelectorAll('.preview-controls button').forEach(b=>b.classList.remove('active'));
+    button.classList.add('active');
+    const view=button.textContent.trim();
+    const car=document.getElementById('car');
+    if(view==='SIDE') car.style.transform='scaleX(.88) rotateY(12deg)';
+    else if(view==='REAR') car.style.transform='scaleX(-1)';
+    else car.style.transform='';
+  });
+});
+
+function saveBuild(){
+  localStorage.setItem('e30heaven-build',JSON.stringify(state));
+  alert('Build saved on this device.');
+}
+
+function loadBuild(){
+  try{
+    const saved=JSON.parse(localStorage.getItem('e30heaven-build'));
+    if(saved){
+      Object.assign(state,saved);
+      calculatePrice();
+      render();
+      alert('Your saved build has been loaded.');
+    }else{
+      alert('No saved build found on this device.');
+    }
+  }catch(e){
+    alert('Could not load the saved build.');
+  }
+}
+
+async function shareBuild(){
+  const text='My E30Heaven build: '+state.model+' / '+state.body+' / '+state.engine+' / '+state.color+' / '+state.wheels+' / '+state.interior;
+  try{
+    if(navigator.share){
+      await navigator.share({title:'My E30Heaven Build',text:text});
+    }else if(navigator.clipboard){
+      await navigator.clipboard.writeText(text);
+      alert('Build copied to clipboard.');
+    }else{
+      prompt('Copy your build:',text);
+    }
+  }catch(e){}
+}
+
+calculatePrice();
 render();
 </script>
 </body></html>
