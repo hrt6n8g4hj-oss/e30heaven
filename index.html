@@ -1,253 +1,66 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>E30Heaven — The Ultimate E30 Community</title>
-<meta name="description" content="E30Heaven — inspiration, knowledge, builds, marketplace, gallery and E30 configurator.">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>E30Heaven — E30 Configurator</title>
 <style>
-:root{--orange:#ff7200;--orange2:#ff8a1f;--bg:#070707;--panel:#111;--panel2:#181818;--line:#2b2b2b;--text:#f4f4f4;--muted:#9c9c9c}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
-a{color:inherit;text-decoration:none}.container{max-width:1280px;margin:auto;padding:0 28px}
-header{height:72px;background:#050505;border-bottom:1px solid #191919;display:flex;align-items:center;position:sticky;top:0;z-index:20}
-.nav{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1450px;margin:auto;padding:0 28px}
-.logo{font-weight:900;font-size:32px;letter-spacing:-2px}.logo span{font-weight:400;font-style:italic;color:var(--orange);font-size:31px;margin-left:5px}
-nav{display:flex;gap:32px;font-size:12px;font-weight:800;letter-spacing:.7px}nav a{padding:28px 0;border-bottom:2px solid transparent}nav a:hover,nav a.active{color:var(--orange);border-color:var(--orange)}
-.actions{display:flex;gap:12px}.btn{border:1px solid #666;background:transparent;color:white;padding:11px 21px;border-radius:5px;font-weight:800;cursor:pointer}.btn.orange{background:var(--orange);border-color:var(--orange)}.btn:hover{transform:translateY(-1px);filter:brightness(1.08)}
-.hero{min-height:410px;background:linear-gradient(90deg,rgba(0,0,0,.9),rgba(0,0,0,.35)),url("hero.jpg") center/cover;display:flex;align-items:center}
-.hero h1{font-size:58px;line-height:.98;margin:0 0 22px;max-width:650px;letter-spacing:-2px;text-transform:uppercase}.hero p{font-size:18px;line-height:1.55;color:#ddd;max-width:560px}.hero .buttons{display:flex;gap:14px;margin-top:25px}
-.features{background:#0d0d0d;border-bottom:1px solid #222}.featuregrid{display:grid;grid-template-columns:repeat(5,1fr)}.feature{padding:24px 18px;border-right:1px solid #333}.feature:last-child{border:0}.feature b{display:block;color:var(--orange);font-size:12px;letter-spacing:1px;margin-bottom:6px}.feature span{font-size:13px;color:#aaa}
-.section{padding:55px 0}.sectionhead{display:flex;justify-content:space-between;align-items:end;margin-bottom:25px}.eyebrow{color:var(--orange);font-weight:900;font-size:11px;letter-spacing:2px}.title{font-size:34px;margin:5px 0 0;letter-spacing:-1px}.muted{color:#999}
-.config{background:linear-gradient(180deg,#111,#090909);border-top:1px solid #222;border-bottom:1px solid #222}
-.configgrid{display:grid;grid-template-columns:350px 1fr;min-height:570px}.steps{border-right:1px solid #2b2b2b;padding:25px 0}.step{padding:15px 25px;border-left:3px solid transparent;color:#888;cursor:pointer}.step.active{border-color:var(--orange);background:#171717;color:white}.step small{display:block;color:var(--orange);font-weight:900;margin-bottom:4px}.builder{padding:30px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.choice{background:#151515;border:1px solid #303030;padding:18px;border-radius:7px;cursor:pointer;text-align:center}.choice.selected{border:2px solid var(--orange);padding:17px}.choice strong{display:block;margin-top:8px}.choice small{color:#888}.specs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}.spec{background:#0c0c0c;border:1px solid #262626;padding:12px}.spec b{display:block;color:var(--orange);font-size:11px;margin-bottom:4px}.preview{position:relative;min-height:360px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(circle at 55% 55%,#242424 0,#0b0b0b 55%,#070707 100%);border:1px solid #202020;border-radius:8px}.preview img{width:92%;max-width:850px;filter:saturate(1.1);transition:.25s}.preview .label{position:absolute;top:18px;left:20px;background:#111;border:1px solid #333;padding:8px 11px;font-size:11px;font-weight:900}.preview-controls{display:flex;gap:8px;position:absolute;right:18px;top:18px}.preview-controls button{background:#111;border:1px solid #333;color:white;padding:8px 11px;border-radius:4px;cursor:pointer}.preview-controls button.active{background:var(--orange);border-color:var(--orange)}
-.summary{display:flex;justify-content:space-between;align-items:center;margin-top:18px}.price{font-size:22px;font-weight:900}.price span{color:var(--orange)}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.tile{background:#111;border:1px solid #242424;padding:24px;border-radius:8px}.tile .icon{font-size:28px;color:var(--orange);margin-bottom:18px}.tile h3{margin:0 0 7px}.tile p{margin:0;color:#999;line-height:1.5;font-size:14px}
-footer{border-top:1px solid #222;padding:35px 0;color:#888;font-size:13px}.footerline{display:flex;justify-content:space-between}
-.mobile{display:none}
-@media(max-width:900px){nav{display:none}.mobile{display:block}.featuregrid{grid-template-columns:repeat(2,1fr)}.configgrid{grid-template-columns:1fr}.steps{display:flex;overflow:auto;border-right:0;border-bottom:1px solid #222}.step{min-width:135px}.hero h1{font-size:43px}.grid3{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.specs{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){.container{padding:0 16px}.hero{min-height:470px}.hero h1{font-size:37px}.featuregrid{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.builder{padding:18px}.preview{min-height:250px}.summary{align-items:flex-start;gap:15px;flex-direction:column}.actions{display:none}}
+:root{--orange:#ff7200;--bg:#070707;--panel:#111;--panel2:#171717;--line:#2b2b2b;--text:#f5f5f5;--muted:#999}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}button,a{font:inherit}a{color:inherit;text-decoration:none}.container{max-width:1280px;margin:auto;padding:0 28px}
+header{height:72px;background:#050505;border-bottom:1px solid #191919;display:flex;align-items:center;position:sticky;top:0;z-index:30}.nav{width:100%;max-width:1450px;margin:auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between}.logo{font-weight:900;font-size:32px;letter-spacing:-2px}.logo span{font-weight:400;font-style:italic;color:var(--orange);font-size:31px;margin-left:5px}nav{display:flex;gap:28px;font-size:12px;font-weight:800;letter-spacing:.7px}nav a{padding:28px 0;border-bottom:2px solid transparent}nav a:hover{color:var(--orange);border-color:var(--orange)}.actions{display:flex;gap:10px}.btn{border:1px solid #555;background:transparent;color:#fff;padding:11px 18px;border-radius:5px;font-weight:800;cursor:pointer;transition:.15s}.btn:hover{transform:translateY(-1px);filter:brightness(1.1)}.btn.orange{background:var(--orange);border-color:var(--orange)}.mobile{display:none;font-size:24px;cursor:pointer}
+.hero{min-height:410px;background:linear-gradient(90deg,rgba(0,0,0,.92),rgba(0,0,0,.3)),url('hero.jpg') center/cover;display:flex;align-items:center}.eyebrow{color:var(--orange);font-size:11px;font-weight:900;letter-spacing:2px}.hero h1{font-size:58px;line-height:.98;letter-spacing:-2px;text-transform:uppercase;margin:10px 0 20px}.hero p{font-size:18px;line-height:1.5;color:#ddd}.hero .buttons{display:flex;gap:12px;margin-top:25px}.features{background:#0d0d0d;border-bottom:1px solid #222}.featuregrid{display:grid;grid-template-columns:repeat(5,1fr)}.feature{padding:23px 18px;border-right:1px solid #333}.feature:last-child{border:0}.feature b{display:block;color:var(--orange);font-size:12px;margin-bottom:6px}.feature span{font-size:13px;color:#aaa}
+.section{padding:55px 0}.sectionhead{display:flex;justify-content:space-between;align-items:end;margin-bottom:25px}.title{font-size:34px;margin:5px 0 0}.muted{color:var(--muted)}
+.config{background:linear-gradient(180deg,#111,#080808);border-top:1px solid #222;border-bottom:1px solid #222}.configgrid{display:grid;grid-template-columns:300px 1fr;min-height:700px}.steps{border-right:1px solid #2b2b2b;padding:20px 0}.step{padding:15px 22px;border-left:3px solid transparent;color:#888;cursor:pointer;transition:.15s}.step:hover{background:#141414;color:#ddd}.step.active{border-color:var(--orange);background:#181818;color:#fff}.step small{display:block;color:var(--orange);font-weight:900;margin-bottom:4px}.builder{padding:28px;min-width:0}.progress{height:4px;background:#252525;border-radius:5px;overflow:hidden;margin-bottom:25px}.progress i{display:block;height:100%;background:var(--orange);width:14.28%;transition:.2s}.builder-top{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:18px}.builder-top h3{margin:0}.counter{font-size:12px;color:#888}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.choice{background:#151515;border:1px solid #303030;padding:18px;border-radius:7px;cursor:pointer;text-align:left;transition:.15s;position:relative}.choice:hover{border-color:#777;transform:translateY(-1px)}.choice.selected{border:2px solid var(--orange);padding:17px;background:#1b160f}.choice.selected:after{content:'✓';position:absolute;right:12px;top:10px;color:var(--orange);font-weight:900}.choice strong{display:block}.choice small{display:block;color:#888;margin-top:6px}.priceTag{color:var(--orange);font-weight:900;margin-top:9px;font-size:12px}
+.preview{position:relative;min-height:350px;margin-top:18px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(circle at 55% 55%,#292929 0,#0c0c0c 55%,#070707 100%);border:1px solid #222;border-radius:8px}.preview img{width:92%;max-width:850px;transition:.25s}.preview .label{position:absolute;top:16px;left:18px;background:#111;border:1px solid #333;padding:8px 11px;font-size:11px;font-weight:900}.view-controls{position:absolute;right:16px;top:16px;display:flex;gap:6px}.view-controls button{background:#111;border:1px solid #333;color:#fff;padding:8px 10px;border-radius:4px;cursor:pointer}.view-controls button.active{background:var(--orange);border-color:var(--orange)}
+.specs{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:18px 0}.spec{background:#0d0d0d;border:1px solid #252525;padding:12px}.spec b{display:block;color:var(--orange);font-size:10px;margin-bottom:4px}.summarybar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-top:16px}.price{font-size:21px;font-weight:900}.price span{color:var(--orange)}.summary-actions{display:flex;gap:8px;flex-wrap:wrap}.toast{position:fixed;right:18px;bottom:18px;background:#171717;border:1px solid #444;padding:13px 16px;border-radius:7px;z-index:100;box-shadow:0 8px 30px #0008;opacity:0;transform:translateY(15px);pointer-events:none;transition:.2s}.toast.show{opacity:1;transform:none}
+.summary-card{background:#111;border:1px solid #2a2a2a;border-radius:8px;padding:22px}.summary-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin:18px 0}.summary-row{padding:12px;background:#0b0b0b;border:1px solid #242424}.summary-row b{display:block;color:var(--orange);font-size:10px;margin-bottom:4px}.empty{padding:30px;text-align:center;color:#888;border:1px dashed #333;border-radius:8px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.tile{background:#111;border:1px solid #242424;padding:24px;border-radius:8px}.tile h3{margin:0 0 8px}.tile p{color:#999;line-height:1.55;font-size:14px}footer{border-top:1px solid #222;padding:35px 0;color:#888;font-size:13px}.footerline{display:flex;justify-content:space-between}
+@media(max-width:950px){nav{display:none}.mobile{display:block}.actions{display:none}.featuregrid{grid-template-columns:repeat(2,1fr)}.configgrid{grid-template-columns:1fr}.steps{display:flex;overflow:auto;border-right:0;border-bottom:1px solid #222}.step{min-width:135px}.cards{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:46px}.grid3{grid-template-columns:1fr}}
+@media(max-width:600px){.container{padding:0 16px}.nav{padding:0 16px}.hero{min-height:470px}.hero h1{font-size:38px}.featuregrid{grid-template-columns:1fr}.builder{padding:18px}.cards{grid-template-columns:1fr}.specs{grid-template-columns:1fr 1fr}.summarybar{align-items:flex-start;flex-direction:column}.preview{min-height:250px}.section{padding:40px 0}}
 </style>
 </head>
 <body>
-<header><div class="nav">
-<a class="logo" href="#">E30<span>Heaven</span></a>
-<nav><a class="active" href="#home">HOME</a><a href="#cars">CARS</a><a href="#guides">BUILD GUIDES</a><a href="#forum">FORUM</a><a href="#market">MARKETPLACE</a><a href="#gallery">GALLERY</a><a href="#about">ABOUT</a></nav>
-<div class="actions"><button class="btn">LOGIN</button><button class="btn orange">JOIN</button></div>
-<div class="mobile">☰</div>
-</div></header>
-
+<header><div class="nav"><a class="logo" href="#home">E30<span>Heaven</span></a><nav><a href="#home">HOME</a><a href="#configurator">CONFIGURATOR</a><a href="#cars">CARS</a><a href="#guides">GUIDES</a><a href="#forum">FORUM</a><a href="#market">MARKETPLACE</a><a href="#gallery">GALLERY</a></nav><div class="actions"><button class="btn" onclick="loadBuild()">LOAD BUILD</button><button class="btn orange" onclick="scrollToConfig()">BUILD E30</button></div><div class="mobile" onclick="toggleMenu()">☰</div></div></header>
 <main id="home">
-<section class="hero"><div class="container">
-<div class="eyebrow">E30HEAVEN.COM</div><h1>The ultimate<br>E30 community</h1>
-<p>Inspiration. Knowledge. Passion.<br>Everything E30 — all in one place.</p>
-<div class="buttons"><a class="btn orange" href="#configurator">EXPLORE CARS</a><a class="btn" href="#about">JOIN THE COMMUNITY</a></div>
-</div></section>
-
-<section class="features"><div class="container featuregrid">
-<div class="feature"><b>▣ BUILD GUIDES</b><span>Step-by-step guides for your E30 build.</span></div>
-<div class="feature"><b>◌ FORUM</b><span>Ask questions, share knowledge, connect.</span></div>
-<div class="feature"><b>▰ MARKETPLACE</b><span>Buy & sell parts and whole cars.</span></div>
-<div class="feature"><b>▧ GALLERY</b><span>Stunning E30s from around the world.</span></div>
-<div class="feature"><b>⚒ CONFIGURATOR</b><span>Build your dream E30 and visualize it.</span></div>
-</div></section>
-
-<section class="section config" id="configurator"><div class="container">
-<div class="sectionhead"><div><div class="eyebrow">BUILD YOUR DREAM E30</div><h2 class="title">E30 Configurator <span style="color:var(--orange);font-size:14px">V1</span></h2></div><div class="muted">Save. Share. Build.</div></div>
-<div class="configgrid">
-<div class="steps">
-<div class="step active" data-step="model"><small>01</small>MODEL</div>
-<div class="step" data-step="body"><small>02</small>BODY STYLE</div>
-<div class="step" data-step="engine"><small>03</small>ENGINE</div>
-<div class="step" data-step="color"><small>04</small>COLOR</div>
-<div class="step" data-step="wheels"><small>05</small>WHEELS</div>
-<div class="step" data-step="interior"><small>06</small>INTERIOR</div>
-<div class="step" data-step="summary"><small>07</small>SUMMARY</div>
-</div>
-<div class="builder">
-<div id="options"></div>
-<div class="preview"><div class="label" id="buildLabel">1989 E30 325i</div><div class="preview-controls"><button class="active">3/4</button><button>SIDE</button><button>REAR</button></div><img id="car" src="e30-preview.png" alt="E30 preview"></div>
-<div class="summary"><div class="price">BUILD VALUE <span id="price">€12,500</span></div><div><button class="btn" onclick="saveBuild()">SAVE BUILD ♡</button> <button class="btn" onclick="loadBuild()">LOAD</button> <button class="btn orange" onclick="shareBuild()">SHARE ↗</button></div></div>
-</div></div>
-</div></section>
-
-<section class="section" id="cars"><div class="container"><div class="sectionhead"><div><div class="eyebrow">EXPLORE</div><h2 class="title">Everything E30</h2></div></div>
-<div class="grid3">
-<div class="tile" id="guides"><div class="icon">▤</div><h3>Build Guides</h3><p>Suspension, engines, rust repair, brakes, interiors and complete build paths.</p></div>
-<div class="tile" id="forum"><div class="icon">◌</div><h3>Community</h3><p>A dedicated place to ask questions, document builds and learn from other owners.</p></div>
-<div class="tile" id="market"><div class="icon">▰</div><h3>Marketplace</h3><p>Peer-to-peer E30 parts, wheels, cars and project finds.</p></div>
-</div></div></section>
-
-<section class="section" id="about"><div class="container"><div class="tile"><div class="eyebrow">THE MISSION</div><h2 class="title">Keeping the legend alive.</h2><p class="muted" style="max-width:750px;line-height:1.7">E30Heaven is built around one simple idea: make the best E30 knowledge, inspiration and community available in one place. V1 is the foundation — the platform can grow into profiles, garages, detailed build databases, marketplace tools and a much deeper configurator.</p></div></div></section>
-</main>
-<footer><div class="container footerline"><span>© 2026 E30Heaven</span><span>Built by enthusiasts. For enthusiasts.</span></div></footer>
-
+<section class="hero"><div class="container"><div class="eyebrow">E30HEAVEN.COM</div><h1>The ultimate<br>E30 community</h1><p>Inspiration. Knowledge. Passion.<br>Everything E30 — all in one place.</p><div class="buttons"><button class="btn orange" onclick="scrollToConfig()">BUILD YOUR E30</button><a class="btn" href="#cars">EXPLORE</a></div></div></section>
+<section class="features"><div class="container featuregrid"><div class="feature"><b>▣ BUILD GUIDES</b><span>Step-by-step guides for your E30 build.</span></div><div class="feature"><b>◌ FORUM</b><span>Ask questions, share knowledge, connect.</span></div><div class="feature"><b>▰ MARKETPLACE</b><span>Buy & sell parts and whole cars.</span></div><div class="feature"><b>▧ GALLERY</b><span>Stunning E30s from around the world.</span></div><div class="feature"><b>⚒ CONFIGURATOR</b><span>Build your dream E30 and visualize it.</span></div></div></section>
+<section class="section config" id="configurator"><div class="container"><div class="sectionhead"><div><div class="eyebrow">BUILD YOUR DREAM E30</div><h2 class="title">E30 Configurator <span style="color:var(--orange);font-size:14px">V2</span></h2></div><div class="muted">Choose → preview → save → share</div></div><div class="configgrid"><div class="steps" id="steps"></div><div class="builder"><div class="progress"><i id="progress"></i></div><div class="builder-top"><h3 id="stepTitle"></h3><div class="counter" id="counter"></div></div><div id="options"></div><div class="preview"><div class="label" id="buildLabel"></div><div class="view-controls"><button data-view="three" class="active">3/4</button><button data-view="side">SIDE</button><button data-view="rear">REAR</button></div><img id="car" src="e30-preview.png" alt="E30 preview"></div><div class="specs" id="specs"></div><div class="summarybar"><div class="price">EST. BUILD VALUE <span id="price"></span></div><div class="summary-actions"><button class="btn" onclick="prevStep()">← BACK</button><button class="btn" onclick="resetBuild()">RESET</button><button class="btn" onclick="saveBuild()">SAVE</button><button class="btn orange" onclick="nextStep()">NEXT →</button></div></div></div></div></div></section>
+<section class="section" id="cars"><div class="container"><div class="sectionhead"><div><div class="eyebrow">EXPLORE</div><h2 class="title">Everything E30</h2></div></div><div class="grid3"><div class="tile" id="guides"><div class="eyebrow">GUIDES</div><h3>Build Guides</h3><p>Suspension, engines, rust repair, brakes, interiors and complete build paths.</p></div><div class="tile" id="forum"><div class="eyebrow">COMMUNITY</div><h3>Forum</h3><p>Ask questions, document builds and learn from other E30 owners.</p></div><div class="tile" id="market"><div class="eyebrow">MARKET</div><h3>Marketplace</h3><p>Peer-to-peer E30 parts, wheels, cars and project finds.</p></div></div></div></section>
+<section class="section" id="gallery"><div class="container"><div class="tile"><div class="eyebrow">COMING NEXT</div><h2 class="title">E30 Gallery</h2><p>Build profiles and a searchable international E30 gallery are next on the roadmap.</p></div></div></section>
+</main><footer><div class="container footerline"><span>© 2026 E30Heaven</span><span>Built by enthusiasts. For enthusiasts.</span></div></footer><div class="toast" id="toast"></div>
 <script>
-const state = {
-  model:'325i', body:'Coupe', engine:'M20B25',
-  color:'Brilliant Red', wheels:'BBS RS', interior:'Black', price:12500
+const steps=[['model','MODEL'],['body','BODY STYLE'],['engine','ENGINE'],['color','COLOR'],['wheels','WHEELS'],['interior','INTERIOR'],['summary','SUMMARY']];
+const data={
+ model:[['318i','M10 • 4-cylinder',0],['320i','M20 • 6-cylinder',2500],['323i','M20 • 6-cylinder',5000],['325i','M20B25 • 6-cylinder',7500],['M3','S14 • Motorsport',35000]],
+ body:[['Coupe','2-door classic',0],['Touring','5-door wagon',3500],['Cabrio','Convertible',5000],['Baur','Targa conversion',4500]],
+ engine:[['M20B20','129 hp',0],['M20B25','170 hp',4500],['S14','195 hp',12000],['M52','193 hp',6500],['S54','333 hp',16000],['S65','420 hp',28000]],
+ color:[['Brilliant Red','Classic',0],['Alpine White','Classic',0],['Delphin Grey','Classic',500],['Diamond Black','Classic',500],['Laguna Seca Blue','BMW Motorsport',1800],['Blood Orange','Custom',1800],['Oxford Green','Classic BMW',900]],
+ wheels:[['OEM Basketweave','15 inch',0],['Alpina','16 inch',1800],['Rondell 58','17 inch',2200],['BBS RS','17 inch',3500],['Style 5','17 inch',2800],['ACS Type 1','17 inch',3200]],
+ interior:[['Black','OEM style',0],['Natur','Leather',1200],['Houndstooth','Cloth',800],['M-Tech Sport','Sport seats',1800],['Custom','Full custom',3500]]
 };
-
-const data = {
-  model:[['318i','M10'],['325i','M20'],['M3','S14']],
-  body:[['Coupe','2-door'],['Touring','Wagon'],['Cabrio','Convertible'],['Baur','Targa']],
-  engine:[['M20B25','170 hp'],['S14','195 hp'],['S54','333 hp'],['M52','193 hp']],
-  color:[['Brilliant Red','Classic'],['Alpine White','Classic'],['Delphin Grey','Classic'],['Blood Orange','Custom'],['Laguna Seca Blue','Custom'],['Black','Classic']],
-  wheels:[['BBS RS','17"'],['Rondell 58','17"'],['Alpina','16"'],['OEM Basketweave','15"']],
-  interior:[['Black','Leather'],['Natur','Leather'],['Houndstooth','Cloth'],['Sport','Bucket']]
-};
-
-const steps=['model','body','engine','color','wheels','interior','summary'];
-let current='model';
-
-function esc(value){
-  return String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
-}
-
-function calculatePrice(){
-  let price=12500;
-  if(state.model==='M3') price+=35000;
-  if(state.engine==='S54') price+=9000;
-  if(state.engine==='S14') price+=6000;
-  if(state.wheels==='BBS RS') price+=2500;
-  if(state.wheels==='Rondell 58') price+=1200;
-  if(state.interior==='Sport') price+=1800;
-  if(state.body==='Touring') price+=2500;
-  state.price=price;
-}
-
-function colorFilter(c){
-  if(c==='Blood Orange') return 'saturate(1.8) hue-rotate(-8deg)';
-  if(c==='Laguna Seca Blue') return 'hue-rotate(155deg) saturate(1.25)';
-  if(c==='Alpine White') return 'grayscale(.15) brightness(1.45)';
-  if(c==='Black') return 'grayscale(1) brightness(.48)';
-  if(c==='Delphin Grey') return 'grayscale(.8) brightness(.75)';
-  return 'saturate(1.15)';
-}
-
-function updatePreview(){
-  calculatePrice();
-  document.getElementById('price').textContent='€'+state.price.toLocaleString('en-US');
-  document.getElementById('buildLabel').textContent='E30 '+state.model+' · '+state.color;
-  document.getElementById('car').style.filter=colorFilter(state.color);
-}
-
+const defaults={model:'325i',body:'Coupe',engine:'M20B25',color:'Brilliant Red',wheels:'BBS RS',interior:'Black'};
+let state={...defaults};let current=0;let view='three';
+const $=id=>document.getElementById(id);
+function stepsUI(){ $('steps').innerHTML=steps.map((s,i)=>`<div class="step ${i===current?'active':''}" data-i="${i}"><small>0${i+1}</small>${s[1]}</div>`).join('');document.querySelectorAll('.step').forEach(el=>el.onclick=()=>go(+el.dataset.i)); }
+function go(i){current=Math.max(0,Math.min(steps.length-1,i));stepsUI();render();}
 function render(){
-  const box=document.getElementById('options');
-
-  if(current==='summary'){
-    box.innerHTML=`
-      <h3>YOUR E30 BUILD</h3>
-      <div class="tile">
-        <p><b>Model:</b> ${esc(state.model)}</p>
-        <p><b>Body:</b> ${esc(state.body)}</p>
-        <p><b>Engine:</b> ${esc(state.engine)}</p>
-        <p><b>Color:</b> ${esc(state.color)}</p>
-        <p><b>Wheels:</b> ${esc(state.wheels)}</p>
-        <p><b>Interior:</b> ${esc(state.interior)}</p>
-        <p><b>Estimated build value:</b> <span style="color:var(--orange)">€${state.price.toLocaleString('en-US')}</span></p>
-      </div>
-      <div style="display:flex;gap:10px;margin-top:15px;flex-wrap:wrap">
-        <button class="btn" onclick="goTo('model')">EDIT BUILD</button>
-        <button class="btn orange" onclick="saveBuild()">SAVE BUILD</button>
-      </div>`;
-    updatePreview();
-    return;
-  }
-
-  box.innerHTML=`
-    <h3>CHOOSE YOUR ${current.toUpperCase()}</h3>
-    <div class="cards">
-      ${data[current].map((x,i)=>`
-        <div class="choice ${state[current]===x[0]?'selected':''}" data-value="${esc(x[0])}" onclick="selectOption('${current}',${i})">
-          <strong>${esc(x[0])}</strong><small>${esc(x[1])}</small>
-        </div>`).join('')}
-    </div>
-    <div class="specs">
-      <div class="spec"><b>MODEL</b>${esc(state.model)}</div>
-      <div class="spec"><b>ENGINE</b>${esc(state.engine)}</div>
-      <div class="spec"><b>BODY</b>${esc(state.body)}</div>
-      <div class="spec"><b>COLOR</b>${esc(state.color)}</div>
-    </div>
-    <div style="display:flex;justify-content:space-between;gap:10px;margin-top:18px">
-      <button class="btn" onclick="previousStep()">← BACK</button>
-      <button class="btn orange" onclick="nextStep()">NEXT →</button>
-    </div>`;
-  updatePreview();
+ const key=steps[current][0];$('stepTitle').textContent=steps[current][1];$('counter').textContent=`STEP ${current+1} OF ${steps.length}`;$('progress').style.width=((current+1)/steps.length*100)+'%';
+ if(key==='summary') renderSummary(); else renderOptions(key);renderSpecs();updatePreview();
 }
-
-function selectOption(key,index){
-  state[key]=data[key][index][0];
-  render();
-}
-
-function goTo(step){
-  current=step;
-  document.querySelectorAll('.step').forEach(x=>x.classList.toggle('active',x.dataset.step===current));
-  render();
-}
-
-function nextStep(){
-  const i=steps.indexOf(current);
-  if(i<steps.length-1) goTo(steps[i+1]);
-}
-
-function previousStep(){
-  const i=steps.indexOf(current);
-  if(i>0) goTo(steps[i-1]);
-}
-
-document.querySelectorAll('.step').forEach(s=>{
-  s.addEventListener('click',()=>goTo(s.dataset.step));
-});
-
-document.querySelectorAll('.preview-controls button').forEach(button=>{
-  button.addEventListener('click',()=>{
-    document.querySelectorAll('.preview-controls button').forEach(b=>b.classList.remove('active'));
-    button.classList.add('active');
-    const view=button.textContent.trim();
-    const car=document.getElementById('car');
-    if(view==='SIDE') car.style.transform='scaleX(.88) rotateY(12deg)';
-    else if(view==='REAR') car.style.transform='scaleX(-1)';
-    else car.style.transform='';
-  });
-});
-
-function saveBuild(){
-  localStorage.setItem('e30heaven-build',JSON.stringify(state));
-  alert('Build saved on this device.');
-}
-
-function loadBuild(){
-  try{
-    const saved=JSON.parse(localStorage.getItem('e30heaven-build'));
-    if(saved){
-      Object.assign(state,saved);
-      calculatePrice();
-      render();
-      alert('Your saved build has been loaded.');
-    }else{
-      alert('No saved build found on this device.');
-    }
-  }catch(e){
-    alert('Could not load the saved build.');
-  }
-}
-
-async function shareBuild(){
-  const text='My E30Heaven build: '+state.model+' / '+state.body+' / '+state.engine+' / '+state.color+' / '+state.wheels+' / '+state.interior;
-  try{
-    if(navigator.share){
-      await navigator.share({title:'My E30Heaven Build',text:text});
-    }else if(navigator.clipboard){
-      await navigator.clipboard.writeText(text);
-      alert('Build copied to clipboard.');
-    }else{
-      prompt('Copy your build:',text);
-    }
-  }catch(e){}
-}
-
-calculatePrice();
-render();
-</script>
-</body></html>
+function renderOptions(key){$('options').innerHTML=`<div class="cards">${data[key].map(([name,desc,extra])=>`<button class="choice ${state[key]===name?'selected':''}" onclick="selectOption('${key}',${JSON.stringify(name)})"><strong>${name}</strong><small>${desc}</small>${extra?`<div class="priceTag">+€${extra.toLocaleString()}</div>`:''}</button>`).join('')}</div>`;}
+function renderSummary(){let rows=Object.keys(defaults).map(k=>`<div class="summary-row"><b>${k.toUpperCase()}</b>${state[k]}</div>`).join('');$('options').innerHTML=`<div class="summary-card"><div class="eyebrow">YOUR BUILD</div><h3 style="margin:6px 0 0">${state.model} ${state.body}</h3><div class="summary-grid">${rows}</div><p class="muted">Everything is stored locally in your browser. Save it or share it with a friend.</p><div class="summary-actions"><button class="btn" onclick="saveBuild()">SAVE BUILD</button><button class="btn orange" onclick="shareBuild()">SHARE BUILD ↗</button></div></div>`;}
+function selectOption(k,v){state[k]=v;updatePreview();render();}
+function renderSpecs(){let hp={M20B20:'129 hp',M20B25:'170 hp',S14:'195 hp',M52:'193 hp',S54:'333 hp',S65:'420 hp'}[state.engine]||'—';$('specs').innerHTML=[['MODEL',state.model],['BODY',state.body],['ENGINE',state.engine],['POWER',hp]].map(x=>`<div class="spec"><b>${x[0]}</b>${x[1]}</div>`).join('');$('price').textContent='€'+price().toLocaleString();}
+function price(){let base=12500;for(const k of Object.keys(defaults)){const item=data[k].find(x=>x[0]===state[k]);if(item)base+=item[2]}return base;}
+function colorFilter(c){return {"Blood Orange":'sepia(.55) saturate(3) hue-rotate(340deg)',"Laguna Seca Blue":'hue-rotate(155deg) saturate(1.4)',"Alpine White":'grayscale(.1) brightness(1.5)',"Diamond Black":'grayscale(1) brightness(.45)',"Delphin Grey":'grayscale(.75) brightness(.8)',"Oxford Green":'sepia(.3) hue-rotate(55deg) saturate(1.8)'}[c]||'saturate(1.15)';}
+function updatePreview(){let img=$('car');img.style.filter=colorFilter(state.color);img.style.transform=view==='side'?'scaleX(.92) translateX(5%)':view==='rear'?'scaleX(-1)':'none';$('buildLabel').textContent=`E30 ${state.model} · ${state.body} · ${state.color}`;}
+document.querySelectorAll('.view-controls button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.view-controls button').forEach(x=>x.classList.remove('active'));b.classList.add('active');view=b.dataset.view;updatePreview();});
+function nextStep(){if(current<steps.length-1)go(current+1);else shareBuild();}function prevStep(){if(current>0)go(current-1);}
+function saveBuild(){localStorage.setItem('e30heaven-build',JSON.stringify(state));localStorage.setItem('e30heaven-build-time',Date.now());toast('Build saved on this device ✓');}
+function loadBuild(){let raw=localStorage.getItem('e30heaven-build');if(!raw){toast('No saved build found');return}try{state={...defaults,...JSON.parse(raw)};go(6);toast('Saved build loaded ✓')}catch(e){toast('Could not load build')}}
+function resetBuild(){state={...defaults};go(0);toast('Configurator reset');}
+async function shareBuild(){const payload=btoa(unescape(encodeURIComponent(JSON.stringify(state))));const url=location.origin+location.pathname+'#build='+payload;try{await navigator.clipboard.writeText(url);toast('Share link copied ✓')}catch(e){if(navigator.share)navigator.share({title:'My E30Heaven Build',text:url});else toast('Copy failed — select the URL manually')}}
+function readHash(){let m=location.hash.match(/build=([^&]+)/);if(!m)return;try{state={...defaults,...JSON.parse(decodeURIComponent(escape(atob(m[1]))))};go(6);toast('Shared build loaded ✓')}catch(e){}}
+function toast(msg){let t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.tt);window.tt=setTimeout(()=>t.classList.remove('show'),2200)}
+function scrollToConfig(){$('configurator').scrollIntoView({behavior:'smooth'});}function toggleMenu(){let n=document.querySelector('nav');n.style.display=n.style.display==='flex'?'none':'flex';n.style.position='absolute';n.style.top='72px';n.style.left='0';n.style.right='0';n.style.padding='15px 20px';n.style.background='#080808';n.style.flexDirection='column';n.style.gap='15px';}
+stepsUI();render();readHash();
+</script></body></html>
